@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>得点計算</title>
+        <link rel="stylesheet" href="../static/css/style13.css">
+    </head>
+    <body>
+        <h1>得点計算</h1>
+        <form method='post' action='/'>
+            <div>
+                <p>親か子:
+                <input type="radio" name="par_or_ch" value="親">親
+                <input type="radio" name="par_or_ch" value="子">子
+                </p>
+                {% if res %}
+                <br><span class="error">{{ res.err_par_or_ch }}</span>
+                {% endif %}
+            </div>
+            <div>
+                <p>ツモかロン:
+                    <input type="radio" name='tsumo_or_ron' value="ツモ">ツモ
+                    <input type="radio" name="tsumo_or_ron" value="ロン">ロン
+                </p>
+                {% if res %}
+                <br><span class="error">{{ res.err_tsumo_or_ron}}</span>
+                {% endif %}
+            </div>
+            <div>
+                <p>何翻
+                    <select name="han">
+                        <option></option>
+                        {% for i in range(1, 13) %}
+                        <option>{{i}}</option>
+                        {% endfor %}
+                    </select>
+                </p>
+                {% if res %}
+                <br><span class="error">{{ res.err_han}}</span>
+                {% endif %}
+            </div>
+            <div>
+                <p>何符
+                    <select name="hu">
+                        <option></option>
+                        {% for i in range(10, 120, 10)%}
+                        <option>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </p>
+                {% if res %}
+                <br><span class="error">{{ res.err_hu}}</span>
+                {% endif %}
+            </div>
+            <input type="submit"value="計算" >
+        </form>
+
+        {% if res %}
+        <div>
+            {% if res.point %}
+            <h2>得点は</h2>
+            <div class="point">
+                {{ res.point }}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+    </body>
+</html>
